@@ -1,0 +1,22 @@
+# depslib dependency file v1.0
+1524577718 source:/home/stt/myproject/ST_server/ST_server/src_code/main.c
+	<stdio.h>
+	<sys/types.h>
+	<sys/socket.h>
+	<unistd.h>
+	"Socket.h"
+
+1524577528 /home/stt/myproject/ST_server/ST_server/src_code/Socket.h
+
+1524568176 source:/home/stt/myproject/ST_server/ST_server/src_code/Socket.c
+	"Socket.h"
+	<sys/socket.h>
+	<netinet/in.h>
+	<arpa/inet.h>
+	<fcntl.h>
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	<signal.h>
+	<errno.h>
+

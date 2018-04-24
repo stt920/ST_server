@@ -23,7 +23,7 @@ int setnonblocking(int fd)
 
     flag |= O_NONBLOCK;
     if(fcntl(fd, F_SETFL, flag) == -1)
-        return -1;   
+        return -1;
 }
 */
 
@@ -37,22 +37,22 @@ int socket_bind_listen(int port)
         //close(listen_fd);
         return -1;
     }
-    
+
     //设置服务器ip、port,并与listen_fd绑定
     struct sockaddr_in server_addr;
     bzero((char*)&server_addr, sizeof(server_addr));
     server_addr.sin_family = AF_INET;
     server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
     server_addr.sin_port = htons((unsigned short)port);
-    
+
     if(bind(listen_fd, (struct sockaddr *)&server_addr, sizeof(server_addr)) == -1)
         return -1;
-       
+
     // 开始监听，最大等待队列长为LISTENS=1024
     if(listen(listen_fd, LISTENS) == -1)
         return -1;
-        
-    return listen_fd;   
+
+    return listen_fd;
 }
 
 int Accept(int listen_fd)
