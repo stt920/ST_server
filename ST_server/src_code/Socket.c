@@ -14,7 +14,7 @@
 #include <signal.h>
 #include <errno.h>
 //设置非阻塞
-/*
+
 int setnonblocking(int fd)
 {
     int flag = fcntl(fd, F_GETFL, 0);
@@ -24,8 +24,8 @@ int setnonblocking(int fd)
     flag |= O_NONBLOCK;
     if(fcntl(fd, F_SETFL, flag) == -1)
         return -1;
+    return 0;
 }
-*/
 
 
 int socket_bind_listen(int port)
