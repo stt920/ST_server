@@ -7,16 +7,8 @@
 
 #define LISTENS 1024
 
-
-
-
 int socket_bind_listen(int port);
 int setnonblocking(int fd);
 int Accept(int listen_fd);
-
-
-
-
-
 
 #endif
