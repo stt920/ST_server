@@ -1,10 +1,11 @@
 # depslib dependency file v1.0
-1524580990 source:/home/stt/myproject/ST_server/ST_server/src_code/main.c
+1524711932 source:/home/stt/myproject/ST_server/ST_server/src_code/main.c
 	<stdio.h>
 	<sys/types.h>
 	<sys/socket.h>
 	<unistd.h>
 	"Socket.h"
+	"epoll.h"
 
 1524577528 /home/stt/myproject/ST_server/ST_server/src_code/Socket.h
 
@@ -20,11 +21,18 @@
 	<signal.h>
 	<errno.h>
 
-1524667036 source:/home/stt/myproject/ST_server/ST_server/src_code/epoll.c
+1524730499 source:/home/stt/myproject/ST_server/ST_server/src_code/epoll.c
 	"epoll.h"
+	"Socket.h"
 	<sys/epoll.h>
 	<stdlib.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<fcntl.h>
+	<unistd.h>
+	<stdio.h>
+	<errno.h>
 
-1524666457 /home/stt/myproject/ST_server/ST_server/src_code/epoll.h
+1524730691 /home/stt/myproject/ST_server/ST_server/src_code/epoll.h
 	<sys/epoll.h>
 

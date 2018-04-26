@@ -62,7 +62,7 @@ int Accept(int listen_fd)
     socklen_t client_addr_len=sizeof(client_addr) ;
     int accept_fd = accept(listen_fd, (struct sockaddr*)&client_addr, &client_addr_len);
     if(accept_fd == -1)
-        perror("accept");
+        printf("Accept Error : %d\n", errno);
     return accept_fd;
 }
 
