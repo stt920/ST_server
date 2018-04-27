@@ -13,6 +13,8 @@
 #include <stdlib.h>
 #include <signal.h>
 #include <errno.h>
+#include <sys/epoll.h>
+#include "epoll.h"
 //设置非阻塞
 
 int setnonblocking(int fd)
@@ -55,14 +57,24 @@ int socket_bind_listen(int port)
     return listen_fd;
 }
 
-int Accept(int listen_fd)
+int Accept_epolladd(int listen_fd,int epoll_fd)
 {
     struct sockaddr_in client_addr;
     memset(&client_addr, 0, sizeof(struct sockaddr_in));
     socklen_t client_addr_len=sizeof(client_addr) ;
     int accept_fd = accept(listen_fd, (struct sockaddr*)&client_addr, &client_addr_len);
     if(accept_fd == -1)
-        printf("Accept Error : %d\n", errno);
+        printf("Accept1 Error : %d\n", errno);
+    //设置为非阻塞
+    int rc=setnonblocking(accept_fd);
+    if(rc==-1)
+        printf("Accept2 Error : %d\n", errno);
+
+    // 文件描述符可以读，边缘触发(Edge Triggered)模式，保证一个socket连接在任一时刻只被一个线程处理
+    st_epoll_add(epoll_fd,accept_fd,(EPOLLIN | EPOLLET | EPOLLONESHOT));
+
+
+
     return accept_fd;
 }
 

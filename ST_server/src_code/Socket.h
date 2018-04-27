@@ -9,6 +9,6 @@
 
 int socket_bind_listen(int port);
 int setnonblocking(int fd);
-int Accept(int listen_fd);
+int Accept_epolladd(int listen_fd,int epoll_fd);
 
 #endif

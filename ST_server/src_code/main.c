@@ -9,26 +9,39 @@
 #include "Socket.h"
 #include "epoll.h"
 #include "errno.h"
-#define SERVERPORT  1238
+#include "threadpool.h"
+
+
+#define SERVERPORT  1251
+
+struct epoll_event *events;
 
 int main(int argc, char *argv[])
 {
+
     int listen_fd=socket_bind_listen(SERVERPORT);
+
     setnonblocking(listen_fd);
-    int epoll_fd=epoll_create(MAXEPOLL);
 
-    struct 	epoll_event	ev;
-	struct 	epoll_event	evs[MAXEPOLL];
+    int epoll_fd=st_epoll_create(0);
 
-	st_epoll_add(epoll_fd,listen_fd,&ev);
+    st_threadpool_t *tp=threadpool_init(4);
 
-	int cur_fds=1; //当前就绪fd
-	while(1)
-	{
-        int wait_fds=st_epoll_wait(epoll_fd, evs, cur_fds, -1);
-        st_handle_events(epoll_fd,listen_fd, evs,ev,wait_fds);
 
-	}
+    int ep=st_epoll_add(epoll_fd,listen_fd,(EPOLLIN | EPOLLET));
+    printf("st_epoll_add:%d\n",ep);
+
+    if(tp!=NULL)
+        printf("server start\n");
+
+    while(1)
+    {
+
+        int events_num=st_epoll_wait(epoll_fd,events ,MAXEVENTS,-1);
+
+        st_handle_events(epoll_fd,listen_fd,events,events_num,tp);
+    }
+
     close(listen_fd);
     return 0;
 }

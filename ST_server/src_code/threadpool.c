@@ -119,7 +119,6 @@ int threadpool_destroy(st_threadpool_t *pool,int graceful)
     }
     return err;
 
-
 }
 
 st_threadpool_t* threadpool_init(int thread_num)
