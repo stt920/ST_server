@@ -21,7 +21,7 @@ int st_epoll_add(int epoll_fd,int fd,int  events);
 int st_epoll_del(int epoll_fd,int listen_fd,struct epoll_event* ev);
 int st_epoll_wait(int epoll_fd, struct epoll_event* events, int max_events, int timeout);
 
-void do_request(int fd);
+void do_request(void *ptr);
 
 int st_handle_events(int epoll_fd,int listen_fd,struct epoll_event* events, \
                         int events_num,st_threadpool_t *tp);

@@ -12,9 +12,9 @@
 #include "threadpool.h"
 
 
-#define SERVERPORT  1251
+#define SERVERPORT  1265
 
-struct epoll_event *events;
+struct epoll_event events[MAXEPOLL];
 
 int main(int argc, char *argv[])
 {
@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
 
     setnonblocking(listen_fd);
 
-    int epoll_fd=st_epoll_create(0);
+    int epoll_fd=st_epoll_create(MAXEPOLL);
 
     st_threadpool_t *tp=threadpool_init(4);
 
@@ -31,12 +31,12 @@ int main(int argc, char *argv[])
     int ep=st_epoll_add(epoll_fd,listen_fd,(EPOLLIN | EPOLLET));
     printf("st_epoll_add:%d\n",ep);
 
-    if(tp!=NULL)
-        printf("server start\n");
+  //  if(tp!=NULL)
+      //  printf("server start\n");
 
     while(1)
     {
-
+        printf("aaaaaa:\n");
         int events_num=st_epoll_wait(epoll_fd,events ,MAXEVENTS,-1);
 
         st_handle_events(epoll_fd,listen_fd,events,events_num,tp);

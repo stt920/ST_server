@@ -12,7 +12,7 @@
 
 typedef struct st_task{
 	void (*func)(void *);    // 处理函数的函数指针
-	void *arg;    // 函数变量
+	void*  arg;    // 函数变量
 	struct st_task *next;    // 任务链表（下一节点指针）
 }st_task_t;
 
